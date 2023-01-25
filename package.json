@@ -1,0 +1,16 @@
+{
+  "name": "thred-core",
+  "version": "0.3.20",
+  "peerDependencies": {
+    "@angular/common": "^13.1.1",
+    "@angular/core": "^13.1.1",
+    "@angular/forms": "^13.1.1",
+    "@angular/material": "^13.1.1",
+    "@angular/cli": "^13.1.1",
+    "@ionic/angular": "^6.5.0",
+    "ethers": "^5.7.2"
+  },
+  "dependencies": {
+    "tslib": "^2.2.0"
+  }
+}

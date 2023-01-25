@@ -1,0 +1,10 @@
+{
+  "projects": {
+    "thredcore": {
+      "name": "thredcore",
+      "integrations": {},
+      "type": "angular"
+    }
+  },
+  "defaultProject": "thredcore"
+}

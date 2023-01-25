@@ -1,0 +1,109 @@
+<div
+  class="w-100 h-100 p-0 d-flex justify-content-between align-content-center flex-column{{
+    page.page.position == 0 ? '' : '-reverse'
+  }}"
+  role="button"
+  (click)="editable ? null : clickedLayout.emit()"
+>
+  <!--NAV BAR-->
+
+  <thred-navigation-bar [bar]="page.page.bar" [position]="page.page.position">
+  </thred-navigation-bar>
+
+  <!--BODY BAR-->
+
+  <div
+    class="w-100 h-100 big-design-body p-0 disable-scrollbars"
+    style="overflow-y: scroll"
+    id="capture"
+    [style.background-color]="page.page.backgroundColor"
+  >
+    <ion-content
+      style="background-color: transparent"
+      *ngIf="page.page.type == 0 || page.page.type == 2"
+    >
+      <ion-refresher
+        slot="fixed"
+        [disabled]="editable"
+        (ionRefresh)="handleRefresh($event)"
+      >
+        <ion-refresher-content
+          [pullingIcon]="'ellipsis-horizontal'"
+          [refreshingSpinner]="'dots'"
+        >
+        </ion-refresher-content>
+      </ion-refresher>
+
+      <!-- show profile header if needed -->
+
+      <ng-container *ngIf="page.page.type == 2">
+        <thred-account [user]="accountDetails.user" [page]="page.page">
+        </thred-account>
+      </ng-container>
+
+      <!-- show template -->
+      <ng-container *ngTemplateOutlet="blocksTemplate"></ng-container>
+    </ion-content>
+
+    <div *ngIf="page.page.type == 1">
+      <thred-auth
+        [authMode]="authDetails.authStyle"
+        [img]="(page.page | cast : AuthPage)?.img ?? authDetails.displayUrl"
+        [name]="(page.page | cast : AuthPage)?.text"
+        [loading]="authDetails.loading"
+        [err]="authDetails.err"
+        [page]="page.page"
+        (authUpdated)="authUpdated.emit($event)"
+      >
+      </thred-auth>
+    </div>
+  </div>
+  <!-- activeBlock.index == i ? activeBlock.block : undefined -->
+  <!--TAB BAR-->
+
+  <thred-tab-bar
+    *ngIf="page.page.type == 0 || page.page.type == 2"
+    (update)="updatePages.emit($event)"
+    [tab]="page.page.tab"
+    [position]="page.page.position"
+    [editable]="editable"
+    [selectedIndex]="page.index"
+    [pages]="layout.pages"
+    (indexChanged)="pageChanged.emit($event)"
+  >
+  </thred-tab-bar>
+</div>
+
+<ng-template #blocksTemplate>
+  <section class="py-0 w-100 mb-0">
+    <div
+      class="ms-0 mb-0 h-100 w-100 d-{{
+        editable ? 'block' : 'flex'
+      }} justify-content-between align-content-center flex-column"
+      cdkDropList
+      [cdkDropListData]="page.page.blocks"
+      (cdkDropListDropped)="updateBlocks.emit($event)"
+    >
+      <ng-container *ngFor="let b of page.page.blocks ?? []; index as i">
+        <div cdkDrag [cdkDragDisabled]="!editable">
+          <thred-block
+            *ngIf="
+              (overrideBlock && overrideBlock.blockIndex == i
+                ? overrideBlock.block
+                : undefined) ?? b as block
+            "
+            [id]="'p-' + i"
+            [block]="block"
+            [active]="
+              overrideBlock != undefined && overrideBlock.blockIndex == i
+            "
+            [page]="page.page"
+            [defaultItems]="defaultItems ? defaultItems[block.type] : undefined"
+            (clicked)="edit.emit({ blockIndex: i, pageIndex: page.index })"
+          >
+          </thred-block>
+        </div>
+      </ng-container>
+    </div>
+  </section>
+</ng-template>
