@@ -18,11 +18,10 @@
     [cdkDropListOrientation]="'horizontal'"
     #tabParent
   >
+    <ng-container *ngFor="let page of pages ?? []; index as tabIndex">
       <div
-        *ngFor="let page of pages ?? []; index as tabIndex"
-        class="px-{{
-          tabIndex != 0 && tabIndex != pages.length - 1 ? 'bar' : '0'
-        }} m-0"
+        
+        class="px-0 m-0"
         [style.width.%]="100 / pages.length"
         [style.height.px]="tabParent.clientHeight"
         [style.background-color]="tab.detailColor"
@@ -35,7 +34,7 @@
           [style.background-color]="tab.backgroundColor"
           [style.color]="
             selectedIndex == tabIndex
-              ? (tab.textColor | colorShade : 50)
+              ? (tab.textColor | colorShade: 50)
               : tab.textColor
           "
           style="font-size: 12px"
@@ -44,5 +43,6 @@
           <!-- {{ page.title }} -->
         </div>
       </div>
+    </ng-container>
   </div>
 </div>

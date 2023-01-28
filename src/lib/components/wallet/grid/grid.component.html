@@ -2,13 +2,24 @@
   class="row m-0 row-cols-{{ grid.rows }} justify-content-{{
     grid.alignment
   }} g-0 w-100"
-  style="pointer-events: none"
   [style.padding.%]="grid.spacing / grid.rows"
+  *ngIf="grid.type == 0"
 >
   <thred-grid-item
     *ngFor="let item of overrideItems ?? items ?? []"
     [grid]="grid"
     [item]="item"
+    (clicked)="clicked.emit($event)"
   >
   </thred-grid-item>
+</div>
+
+<div
+  class="m-0 scrolling-wrapper-flexbox justify-content-start align-items-center w-100"
+  [style.padding.%]="grid.spacing / grid.rows"
+  *ngIf="grid.type == 1"
+>
+  <div class="cards" [style.width.%]="100/grid.rows" *ngFor="let item of overrideItems ?? items ?? []">
+    <thred-grid-item [grid]="grid" [item]="item" (clicked)="clicked.emit($event)"> </thred-grid-item>
+  </div>
 </div>

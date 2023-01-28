@@ -1,4 +1,4 @@
-<div class="col m-0" [style.padding.%]="grid.spacing" #col>
+<div class="m-0" [style.padding.%]="grid.spacing" #col>
   <div
     style="overflow: hidden"
     [style.border-radius.%]="grid.corners"
@@ -31,11 +31,12 @@
       grid.shadow.color
     "
     #content
+    (click)="clicked.emit(item)"
   >
     <div class="p-0 w-100">
       <ng-container *ngIf="item.type == 0">
         <img
-          *ngIf="item.data | cast : NFT as nft"
+          *ngIf="item.data | cast: NFT as nft"
           id="image"
           class="h-100 w-100"
           [src]="nft.img"
@@ -46,10 +47,21 @@
 
       <ng-container *ngIf="item.type == 6">
         <img
-          *ngIf="item.data | cast : NFT as nft"
+          *ngIf="item.data | cast: NFT as nft"
           id="image"
           class="h-100 w-100"
           [src]="nft.img"
+          alt="ok"
+          style="object-fit: cover; aspect-ratio: 1"
+        />
+      </ng-container>
+
+      <ng-container *ngIf="item.type == 8">
+        <img
+          *ngIf="item.data | cast: App as app"
+          id="image"
+          class="h-100 w-100"
+          [src]="app.displayUrl"
           alt="ok"
           style="object-fit: cover; aspect-ratio: 1"
         />
@@ -59,41 +71,36 @@
         <div
           class="w-100"
           style="aspect-ratio: 1"
-          *ngIf="item.data | cast : Chain as chain"
+          *ngIf="item.data | cast: Chain as chain"
         >
           <div
             class="w-100 h-100 d-flex justify-content-center align-items-center flex-column"
             *ngIf="content.clientWidth as width"
           >
-            <div
-              class="w-100 text-center"
-              [style.padding-left.%]="15"
-              [style.padding-right.%]="15"
-            >
+            <ng-container *ngIf="chain.balance != undefined">
               <img
                 class="rounded-circle mx-auto"
                 style="width: 25%; aspect-ratio: 1; object-fit: cover"
-                [style.margin-bottom.px]="
-                  chain.balance != undefined ? width * 0.085 : 0
-                "
                 [src]="chain.url"
               />
-              <ng-container *ngIf="chain.balance != undefined">
-                <br />
-                <span class="fw-bold" [style.font-size.px]="width * 0.12">
-                  {{ chain.balance | formatEther : 2 }}
-                  {{ chain.currency }}</span
-                >
-                <br />
-                <span
-                  class="text-truncate w-100 text-center"
-                  [style.font-size.px]="width * 0.08"
-                  [style.margin-top.px]="width * 0.025"
-                >
-                  {{ chain.name }}</span
-                >
-              </ng-container>
-            </div>
+              <span
+                class="fw-bold"
+                [style.font-size.px]="width * 0.12"
+                [style.line-height.px]="width * 0.12 + 2.5"
+                [style.padding-bottom.%]="6"
+                [style.padding-top.%]="8"
+              >
+                {{ chain.balance | formatEther: 2 }}
+                {{ chain.currency }}</span
+              >
+              <span
+                class="text-truncate w-100 text-center"
+                [style.font-size.px]="width * 0.08"
+                [style.line-height.px]="width * 0.08 + 2.5"
+              >
+                {{ chain.name }}</span
+              >
+            </ng-container>
           </div>
         </div>
       </ng-container>
@@ -101,7 +108,7 @@
       <ng-container *ngIf="item.type == 1">
         <img
           #image
-          *ngIf="item.data | cast : Media as img"
+          *ngIf="item.data | cast: Media as img"
           class="w-100"
           id="image"
           [src]="img.url"
@@ -109,6 +116,28 @@
           [style.aspect-ratio]="img.width / img.height"
         />
       </ng-container>
+
+      <ng-container *ngIf="item.type == 2">
+        <div
+          *ngIf="item.data | cast: string as str"
+          class="w-100"
+          [innerHTML]="str | safeHTML"
+        ></div>
+      </ng-container>
     </div>
   </div>
+  <p
+    *ngIf="content.clientWidth as width"
+    #titles
+    class="text-center text-truncate mt-1"
+    [style.font-size.px]="width * 0.15"
+    [style.color]="grid.textColor"
+    [hidden]="item.type != 8"
+  >
+    <ng-container *ngIf="item.type == 8">
+      <ng-container *ngIf="item.data | cast: App as app">
+        {{ app.name }}
+      </ng-container>
+    </ng-container>
+  </p>
 </div>

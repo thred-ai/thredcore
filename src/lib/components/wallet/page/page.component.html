@@ -19,6 +19,7 @@
     [style.background-color]="page.page.backgroundColor"
   >
     <ion-content
+      class="w-100"
       style="background-color: transparent"
       *ngIf="page.page.type == 0 || page.page.type == 2"
     >
@@ -48,8 +49,8 @@
     <div *ngIf="page.page.type == 1">
       <thred-auth
         [authMode]="authDetails.authStyle"
-        [img]="(page.page | cast : AuthPage)?.img ?? authDetails.displayUrl"
-        [name]="(page.page | cast : AuthPage)?.text"
+        [img]="(page.page | cast: AuthPage)?.img ?? authDetails.displayUrl"
+        [name]="(page.page | cast: AuthPage)?.text"
         [loading]="authDetails.loading"
         [err]="authDetails.err"
         [page]="page.page"
@@ -85,7 +86,7 @@
       (cdkDropListDropped)="updateBlocks.emit($event)"
     >
       <ng-container *ngFor="let b of page.page.blocks ?? []; index as i">
-        <div cdkDrag [cdkDragDisabled]="!editable">
+        <div class="w-100" cdkDrag [cdkDragDisabled]="!editable">
           <thred-block
             *ngIf="
               (overrideBlock && overrideBlock.blockIndex == i
@@ -100,6 +101,7 @@
             [page]="page.page"
             [defaultItems]="defaultItems ? defaultItems[block.type] : undefined"
             (clicked)="edit.emit({ blockIndex: i, pageIndex: page.index })"
+            (clickedItem)="clickedItem.emit($event)"
           >
           </thred-block>
         </div>

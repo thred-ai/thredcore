@@ -1,12 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Chain, Media } from '../../../models';
-import { NFT } from '../../../models/nft/nft.model';
-import { Grid } from '../../../models/wallet/grid.model';
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { App, Chain, Media } from "../../../models";
+import { NFT } from "../../../models/nft/nft.model";
+import { Grid } from "../../../models/wallet/grid.model";
 
 @Component({
-  selector: 'thred-grid-item',
-  templateUrl: './grid-item.component.html',
-  styleUrls: ['./grid-item.component.scss'],
+  selector: "thred-grid-item",
+  templateUrl: "./grid-item.component.html",
+  styleUrls: ["./grid-item.component.scss"],
 })
 export class GridItemComponent implements OnInit {
   constructor() {}
@@ -14,8 +14,12 @@ export class GridItemComponent implements OnInit {
   @Input() grid!: Grid;
 
   NFT!: NFT;
-  Media!: Media
-  Chain!: Chain
+  Media!: Media;
+  Chain!: Chain;
+  App!: App;
+  string!: string;
+
+  @Output() clicked = new EventEmitter<{ type: number; data: any }>();
 
   ngOnInit(): void {}
 }

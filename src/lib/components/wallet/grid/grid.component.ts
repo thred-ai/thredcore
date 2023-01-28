@@ -1,22 +1,23 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Block } from '../../../models/wallet/block.model';
-import { Grid } from '../../../models/wallet/grid.model';
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Block } from "../../../models/wallet/block.model";
+import { Grid } from "../../../models/wallet/grid.model";
 
 @Component({
-  selector: 'thred-grid',
-  templateUrl: './grid.component.html',
-  styleUrls: ['./grid.component.scss'],
+  selector: "thred-grid",
+  templateUrl: "./grid.component.html",
+  styleUrls: ["./grid.component.scss"],
 })
 export class GridComponent implements OnInit {
   constructor() {}
 
   items: { type: number; data: any }[] = [];
   overrideItems?: { type: number; data: any }[];
-  
-  type = 0
+  @Output() clicked = new EventEmitter<{ type: number; data: any }>();
+
+  type = 0;
   grid!: Grid;
 
-  @Input() set defaultItems(items: {block: number, data: any[]} | undefined) {
+  @Input() set defaultItems(items: { block: number; data: any[] } | undefined) {
     if (items && (items.data as any[])) {
       this.overrideItems = items.data.map((item: any) => {
         return {
@@ -29,7 +30,7 @@ export class GridComponent implements OnInit {
 
   @Input() set block(block: Block) {
     this.grid = block.grid;
-    this.type = block.type
+    this.type = block.type;
     switch (block.type) {
       case 0:
         this.items = (block.nftList.nfts ?? []).map((nft) => {
@@ -44,6 +45,22 @@ export class GridComponent implements OnInit {
           return {
             type: block.type,
             data: img,
+          };
+        });
+        break;
+      case 2:
+        this.items = [
+          {
+            type: 2,
+            data: block.html,
+          },
+        ];
+        break;
+      case 8:
+        this.items = (block.apps ?? []).map((app) => {
+          return {
+            type: block.type,
+            data: app,
           };
         });
         break;

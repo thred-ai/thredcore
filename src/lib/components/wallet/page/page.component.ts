@@ -57,6 +57,7 @@ export class PageComponent implements OnInit {
 
   @Output() updateBlocks = new EventEmitter<any>();
   @Output() clickedLayout = new EventEmitter<any>();
+  @Output() clickedItem = new EventEmitter<{ type: number; data: any }>();
   @Output() refreshed = new EventEmitter<any>();
 
   @Output() edit = new EventEmitter<{

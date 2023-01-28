@@ -22,6 +22,7 @@ import { AddressPipe } from './pipes/address.pipe';
 import { SafeUrlPipe } from './pipes/safe-url.pipe';
 import { FormatEtherPipe } from './pipes/format-ether.pipe';
 import { LoaderComponent } from './components/general/loader/loader.component';
+import { SafeHTMLPipe } from './pipes/safeHTML.pipe';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { LoaderComponent } from './components/general/loader/loader.component';
     CastPipe,
     AddressPipe,
     SafeUrlPipe,
+    SafeHTMLPipe,
     FormatEtherPipe,
     AccountComponent,
     LoaderComponent

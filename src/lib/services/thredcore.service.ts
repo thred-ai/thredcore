@@ -1,6 +1,6 @@
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { Inject, Injectable, PLATFORM_ID } from "@angular/core";
+import { Router } from "@angular/router";
+import { BehaviorSubject } from "rxjs";
 import {
   Layout,
   Page,
@@ -16,14 +16,16 @@ import {
   AccountPage,
   Developer,
   Chain,
-} from '../models';
+  Media,
+  App,
+} from "../models";
 
 export interface Dict<T> {
   [key: string]: T;
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class ThredCoreService {
   constructor(
@@ -37,7 +39,6 @@ export class ThredCoreService {
 
   syncPages(layouts: Dict<Layout> = {}) {
     let lays: Dict<Layout> = {};
-
     Object.values(layouts)?.map((layout) => {
       lays[layout.type] = new Layout(
         layout.name,
@@ -79,7 +80,30 @@ export class ThredCoreService {
             })
           ),
           block.type,
-          block.imgs,
+          block.imgs.map((img) => {
+            return new Media(
+              img.title,
+              img.url,
+              img.type,
+              img.description,
+              img.date,
+              img.width,
+              img.height
+            );
+          }),
+          block.apps?.map((app) => {
+            return new App(
+              app.id,
+              app.name,
+              app.creatorName,
+              app.displayUrl,
+              app.description,
+              app.available,
+              app.coverUrl,
+              app.loadURL,
+              app.defaultChain
+            );
+          }),
           new Grid(
             block.grid?.spacing,
             block.grid?.rows,
@@ -204,7 +228,30 @@ export class ThredCoreService {
             })
           ),
           block.type,
-          block.imgs,
+          block.imgs.map((img) => {
+            return new Media(
+              img.title,
+              img.url,
+              img.type,
+              img.description,
+              img.date,
+              img.width,
+              img.height
+            );
+          }),
+          block.apps?.map((app) => {
+            return new App(
+              app.id,
+              app.name,
+              app.creatorName,
+              app.displayUrl,
+              app.description,
+              app.available,
+              app.coverUrl,
+              app.loadURL,
+              app.defaultChain
+            );
+          }),
           new Grid(
             block.grid?.spacing,
             block.grid?.rows,
@@ -336,7 +383,7 @@ export class ThredCoreService {
     );
   }
 
-  syncChains(chains: any[], walletChains?: string[]) {
+  syncChains(chains: any[], walletChains?: number[]) {
     if (walletChains) {
       return walletChains.flatMap((wc) => {
         let sameChain = chains.find((c) => c.id == wc);
@@ -347,9 +394,17 @@ export class ThredCoreService {
       });
     }
     return chains.map((c) => {
-      let chain = new Chain(c.name, c.id, c.symbol, c.price, !c.main, c.rank, c.url);
-      chain.balance = c.balance
-      return chain
+      let chain = new Chain(
+        c.name,
+        c.id,
+        c.symbol,
+        c.price,
+        !c.main,
+        c.rank,
+        c.url
+      );
+      chain.balance = c.balance;
+      return chain;
     });
   }
 }

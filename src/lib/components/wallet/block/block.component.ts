@@ -18,6 +18,7 @@ export class BlockComponent implements OnInit {
   @Input() defaultItems?: any[]
 
   @Output() clicked = new EventEmitter<any>();
+  @Output() clickedItem = new EventEmitter<{ type: number; data: any }>();
 
   ngOnInit(): void {
   }
