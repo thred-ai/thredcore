@@ -23,6 +23,7 @@ import { SafeUrlPipe } from './pipes/safe-url.pipe';
 import { FormatEtherPipe } from './pipes/format-ether.pipe';
 import { LoaderComponent } from './components/general/loader/loader.component';
 import { SafeHTMLPipe } from './pipes/safeHTML.pipe';
+import { AutosizePipe } from './pipes/autosize.pipe';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { SafeHTMLPipe } from './pipes/safeHTML.pipe';
     SafeHTMLPipe,
     FormatEtherPipe,
     AccountComponent,
-    LoaderComponent
+    LoaderComponent,
+    AutosizePipe
   ],
   imports: [
     CommonModule,

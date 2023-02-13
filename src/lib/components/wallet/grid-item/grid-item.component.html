@@ -77,6 +77,7 @@
             class="w-100 h-100 d-flex justify-content-center align-items-center flex-column"
             *ngIf="content.clientWidth as width"
           >
+          <!-- change heights to *ngIf="content.clientHeight as width" -->
             <ng-container *ngIf="chain.balance != undefined">
               <img
                 class="rounded-circle mx-auto"
@@ -131,6 +132,7 @@
     #titles
     class="text-center text-truncate mt-1"
     [style.font-size.px]="width * 0.15"
+    [style.line-height.px]="width * 0.3"
     [style.color]="grid.textColor"
     [hidden]="item.type != 8"
   >

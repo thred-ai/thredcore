@@ -175,12 +175,17 @@ $mat-expansion-panel-header: 40px;
 
 .disable-scrollbars {
   scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* IE 10+ */
+  -ms-overflow-style: none; /* IE 10+ */
 
   &::-webkit-scrollbar {
     background: transparent; /* Chrome/Safari/Webkit */
     width: 0px;
   }
+}
+
+:root {
+  --refresher-colour: #343a40;
+  --ion-background-color: white;
 }
 
 ion-refresher {
@@ -189,4 +194,16 @@ ion-refresher {
 
 ion-content {
   background-color: transparent !important;
+}
+
+ion-content::part(scroll)::-webkit-scrollbar {
+  display: none;
+}
+
+::ng-deep ion-spinner {
+  color: var(--refresher-colour) !important;
+}
+
+::ng-deep ion-icon {
+  color: var(--refresher-colour) !important;
 }

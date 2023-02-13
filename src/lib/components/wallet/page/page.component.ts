@@ -40,6 +40,7 @@ export class PageComponent implements OnInit {
 
   @Input() defaultItems?: Dict<any[]>
 
+  @Input() safeArea: {top: number, bottom: number} = {top: 0, bottom: 0};
 
 
   @Input() overrideBlock?: {
@@ -50,6 +51,7 @@ export class PageComponent implements OnInit {
 
   @Input() authDetails!: any;
   @Input() accountDetails!: any;
+  @Input() pageDetails!: any;
 
   @Output() authUpdated = new EventEmitter<{type: string, data: any}>();
 
@@ -71,7 +73,9 @@ export class PageComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
 
   changeColor(detailColor: string, backgroundColor: string, textColor: string) {
     document.documentElement.style.setProperty(

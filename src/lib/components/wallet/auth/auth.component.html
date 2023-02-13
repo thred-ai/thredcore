@@ -2,21 +2,31 @@
   <div
     class="w-100 d-flex justify-content-center flex-column align-items-center border-0"
   >
+    <!-- *ngIf="content.clientWidth as width"
+      *ngIf="content.clientHeight as height" -->
     <div
       class="w-100 d-flex flex-column justify-content-center align-items-center"
-      *ngIf="mode != 3"
+      
     >
-      <!-- <img
-        class="w-100 h-100"
-        [src]="'assets/auth_design.svg'"
-        style="object-fit: cover"
-      /> -->
+
+    <div class="bg-white w-100">
+      <ion-input></ion-input>
+
+    </div>
+
       <div
-        class="w-100 d-flex justify-content-center align-items-center px-4 pt-2 pt-md-0"
+        class="d-flex justify-content-center align-items-center pt-2 pt-md-0"
+        #content
+        style="min-height: 50vh"
+        [style.width.px]="
+          (layoutMode == 'desktop' ? 600 : 350)
+            | autosize: 'width':displayFrame:layoutMode:false
+        "
       >
+
         <form
           *ngIf="authMode == 1"
-          style="width: 600px; max-width: 100%"
+          style="width: 100%"
           [formGroup]="
             mode == 0 ? signUpForm : mode == 1 ? signInForm : passResetForm
           "
@@ -44,15 +54,54 @@
               </div>
 
               <div class="w-100 py-4">
-                <div class="w-100 py-1">
-                  <span style="font-size: small" class="w-100 text-start"
+                <div class="w-100">
+                  <span
+                    [style.font-size.px]="
+                      layoutConsts.labelHeight
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.line-height.px]="
+                      layoutConsts.labelHeight
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    class="w-100 text-start"
                     >Email</span
                   >
-                  <div class="rounded-15 border w-100 pb-2 px-4 mb-2 mt-1">
+                  <div
+                    class="border w-100"
+                    [style.padding-left.px]="
+                      layoutConsts.fieldHeight * 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.padding-right.px]="
+                      layoutConsts.fieldHeight * 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.padding-bottom.px]="
+                      layoutConsts.fieldHeight / 1.5
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.margin-bottom.px]="
+                      layoutConsts.spacing
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.margin-top.px]="
+                      layoutConsts.spacing * 0.5
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.border-radius.px]="
+                      layoutConsts.cornerRadius
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                  >
                     <mat-form-field
                       class="w-100"
                       appearance="legacy"
                       floatLabel="never"
+                      [style.font-size.px]="
+                        layoutConsts.fieldHeight
+                          | autosize: 'height':displayFrame:layoutMode
+                      "
                     >
                       <input
                         class="h-100"
@@ -65,15 +114,54 @@
                     </mat-form-field>
                   </div>
                 </div>
-                <div class="w-100 py-1">
-                  <span style="font-size: small" class="w-100 text-start"
+                <div class="w-100">
+                  <span
+                    [style.font-size.px]="
+                      layoutConsts.labelHeight
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.line-height.px]="
+                      layoutConsts.labelHeight
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    class="w-100 text-start"
                     >Password</span
                   >
-                  <div class="rounded-15 border w-100 pb-2 px-4 mb-2 mt-1">
+                  <div
+                    class="border w-100"
+                    [style.padding-left.px]="
+                      layoutConsts.fieldHeight * 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.padding-right.px]="
+                      layoutConsts.fieldHeight * 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.padding-bottom.px]="
+                      layoutConsts.fieldHeight / 1.5
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.margin-bottom.px]="
+                      layoutConsts.spacing
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.margin-top.px]="
+                      layoutConsts.spacing * 0.5
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.border-radius.px]="
+                      layoutConsts.cornerRadius
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                  >
                     <mat-form-field
                       class="w-100"
                       appearance="legacy"
                       floatLabel="never"
+                      [style.font-size.px]="
+                        layoutConsts.fieldHeight
+                          | autosize: 'height':displayFrame:layoutMode
+                      "
                     >
                       <input
                         class="h-100"
@@ -86,15 +174,54 @@
                     </mat-form-field>
                   </div>
                 </div>
-                <div class="w-100 py-1">
-                  <span style="font-size: small" class="w-100 text-start"
+                <div class="w-100">
+                  <span
+                    [style.font-size.px]="
+                      layoutConsts.labelHeight
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.line-height.px]="
+                      layoutConsts.labelHeight
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    class="w-100 text-start"
                     >Confirm Password</span
                   >
-                  <div class="rounded-15 border w-100 pb-2 px-4 mb-2 mt-1">
+                  <div
+                    class="border w-100"
+                    [style.padding-left.px]="
+                      layoutConsts.fieldHeight * 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.padding-right.px]="
+                      layoutConsts.fieldHeight * 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.padding-bottom.px]="
+                      layoutConsts.fieldHeight / 1.5
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.margin-bottom.px]="
+                      layoutConsts.spacing
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.margin-top.px]="
+                      layoutConsts.spacing * 0.5
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.border-radius.px]="
+                      layoutConsts.cornerRadius
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                  >
                     <mat-form-field
                       class="w-100"
                       appearance="legacy"
                       floatLabel="never"
+                      [style.font-size.px]="
+                        layoutConsts.fieldHeight
+                          | autosize: 'height':displayFrame:layoutMode
+                      "
                     >
                       <input
                         class="h-100"
@@ -131,11 +258,43 @@
                 </div>
                 <div class="w-100 py-1 mt-3">
                   <button
-                    class="btn shadow rounded-15 px-5 py-3 fw-bold w-100 mt-1"
+                    class="btn shadow fw-bold w-100"
                     (click)="continue()"
                     id="continue"
                     [style.background-color]="page.textColor"
                     [style.color]="page.backgroundColor"
+                    [style.padding-left.px]="
+                      layoutConsts.fieldHeight / 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.padding-right.px]="
+                      layoutConsts.fieldHeight / 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.padding-bottom.px]="
+                      layoutConsts.fieldHeight / 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.padding-top.px]="
+                      layoutConsts.fieldHeight / 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.margin-bottom.px]="
+                      layoutConsts.spacing
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.margin-top.px]="
+                      layoutConsts.spacing * 0.5
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.border-radius.px]="
+                      layoutConsts.cornerRadius
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.font-size.px]="
+                      layoutConsts.fieldHeight
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
                   >
                     Continue
                     <span
@@ -150,7 +309,14 @@
                 <div class="w-100 py-1 mt-3 px-2">
                   <p
                     class="w-100 text-center"
-                    style="font-size: small"
+                    [style.font-size.px]="
+                      layoutConsts.fieldHeight
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.line-height.px]="
+                      layoutConsts.fieldHeight
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
                     role="button"
                     (click)="mode = 1"
                   >
@@ -190,15 +356,54 @@
               </div>
 
               <div class="w-100 py-4">
-                <div class="w-100 py-1">
-                  <span style="font-size: small" class="w-100 text-start"
+                <div class="w-100">
+                  <span
+                    [style.font-size.px]="
+                      layoutConsts.labelHeight
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.line-height.px]="
+                      layoutConsts.labelHeight
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    class="w-100 text-start"
                     >Email</span
                   >
-                  <div class="rounded-15 border w-100 pb-2 px-4 mb-2 mt-1">
+                  <div
+                    class="border w-100"
+                    [style.padding-left.px]="
+                      layoutConsts.fieldHeight * 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.padding-right.px]="
+                      layoutConsts.fieldHeight * 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.padding-bottom.px]="
+                      layoutConsts.fieldHeight / 1.5
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.margin-bottom.px]="
+                      layoutConsts.spacing
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.margin-top.px]="
+                      layoutConsts.spacing * 0.5
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.border-radius.px]="
+                      layoutConsts.cornerRadius
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                  >
                     <mat-form-field
                       class="w-100"
                       appearance="legacy"
                       floatLabel="never"
+                      [style.font-size.px]="
+                        layoutConsts.fieldHeight
+                          | autosize: 'height':displayFrame:layoutMode
+                      "
                     >
                       <input
                         class="h-100"
@@ -211,15 +416,54 @@
                     </mat-form-field>
                   </div>
                 </div>
-                <div class="w-100 py-1">
-                  <span style="font-size: small" class="w-100 text-start"
+                <div class="w-100">
+                  <span
+                    [style.font-size.px]="
+                      layoutConsts.labelHeight
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.line-height.px]="
+                      layoutConsts.labelHeight
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    class="w-100 text-start"
                     >Password</span
                   >
-                  <div class="rounded-15 border w-100 pb-2 px-4 mb-2 mt-1">
+                  <div
+                    class="border w-100"
+                    [style.padding-left.px]="
+                      layoutConsts.fieldHeight * 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.padding-right.px]="
+                      layoutConsts.fieldHeight * 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.padding-bottom.px]="
+                      layoutConsts.fieldHeight / 1.5
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.margin-bottom.px]="
+                      layoutConsts.spacing
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.margin-top.px]="
+                      layoutConsts.spacing * 0.5
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.border-radius.px]="
+                      layoutConsts.cornerRadius
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                  >
                     <mat-form-field
                       class="w-100"
                       appearance="legacy"
                       floatLabel="never"
+                      [style.font-size.px]="
+                        layoutConsts.fieldHeight
+                          | autosize: 'height':displayFrame:layoutMode
+                      "
                     >
                       <input
                         class="h-100"
@@ -233,7 +477,17 @@
                   </div>
                 </div>
                 <div class="w-100 py-1 mt-2 px-2" *ngIf="!err">
-                  <p class="w-100 text-center" style="font-size: small">
+                  <p
+                    class="w-100 text-center"
+                    [style.font-size.px]="
+                      layoutConsts.fieldHeight
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.line-height.px]="
+                      layoutConsts.fieldHeight
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                  >
                     <b
                       role="button"
                       class="fw-bold animate__animated animate__fadeIn"
@@ -245,18 +499,53 @@
                 <div class="w-100 py-1 mt-2 px-2" *ngIf="err">
                   <p
                     class="w-100 text-center text-danger animate__animated animate__fadeIn"
-                    style="font-size: small"
+                    [style.font-size.px]="
+                      layoutConsts.fieldHeight
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
                   >
                     {{ err }}
                   </p>
                 </div>
                 <div class="w-100 py-1 mt-3">
                   <button
-                    class="btn shadow rounded-15 px-5 py-3 fw-bold w-100 mt-1"
+                    class="btn shadow fw-bold w-100"
                     (click)="continue()"
                     id="continue"
                     [style.background-color]="page.textColor"
                     [style.color]="page.backgroundColor"
+                    [style.padding-left.px]="
+                      layoutConsts.fieldHeight / 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.padding-right.px]="
+                      layoutConsts.fieldHeight / 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.padding-bottom.px]="
+                      layoutConsts.fieldHeight / 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.padding-top.px]="
+                      layoutConsts.fieldHeight / 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.margin-bottom.px]="
+                      layoutConsts.spacing
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.margin-top.px]="
+                      layoutConsts.spacing * 0.5
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.border-radius.px]="
+                      layoutConsts.cornerRadius
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.font-size.px]="
+                      layoutConsts.fieldHeight
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
                   >
                     Continue
                     <span
@@ -271,12 +560,327 @@
                 <div class="w-100 py-1 mt-3 px-2">
                   <p
                     class="w-100 text-center"
-                    style="font-size: small"
+                    [style.font-size.px]="
+                      layoutConsts.fieldHeight
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.line-height.px]="
+                      layoutConsts.fieldHeight
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
                     role="button"
                     (click)="mode = 0"
                   >
                     Don't have an account?
                     <b role="button" class="fw-bold">Sign Up</b>.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </form>
+
+        <form
+          *ngIf="authMode == 2"
+          style="width: 100%"
+          [formGroup]="privateKeyForm"
+        >
+          <ng-container *ngIf="keyMode == 0">
+            <div
+              class="w-100 h-100 d-flex flex-column justify-content-center align-items-center animate__animated animate__fadeIn"
+              [style.color]="page.textColor"
+            >
+              <div class="w-100 text-center">
+                <div class="mw-50 mt-5 mb-3 mx-auto" *ngIf="img">
+                  <img
+                    #image
+                    id="image"
+                    class="w-100"
+                    [src]="img.url"
+                    style="object-fit: contain"
+                    [style.aspect-ratio]="img.width / img.height"
+                  />
+                </div>
+
+                <div class="w-100 mb-1" *ngIf="name">
+                  <h4 class="w-100 text-center">{{ name }}</h4>
+                </div>
+              </div>
+
+              <div class="w-100 py-4">
+                <div class="w-100">
+                  <!-- <span style="font-size: small" class="w-100 text-start"
+                    >Email</span
+                  > -->
+                  <button
+                    class="btn shadow fw-bold w-100"
+                    (click)="continue()"
+                    id="continue"
+                    [style.background-color]="page.textColor"
+                    [style.color]="page.backgroundColor"
+                    [style.padding-left.px]="
+                      layoutConsts.fieldHeight / 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.padding-right.px]="
+                      layoutConsts.fieldHeight / 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.padding-bottom.px]="
+                      layoutConsts.fieldHeight / 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.padding-top.px]="
+                      layoutConsts.fieldHeight / 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.margin-bottom.px]="
+                      layoutConsts.spacing
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.margin-top.px]="
+                      layoutConsts.spacing * 0.5
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.border-radius.px]="
+                      layoutConsts.cornerRadius
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.font-size.px]="
+                      layoutConsts.fieldHeight
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                  >
+                    New Wallet
+                    <span
+                      *ngIf="loading"
+                      class="spinner-border spinner-border-sm ms-1"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                  </button>
+                </div>
+                <div class="w-100">
+                  <!-- <span style="font-size: small" class="w-100 text-start"
+                    >Password</span
+                  > -->
+                  <button
+                    class="btn shadow fw-bold w-100"
+                    (click)="keyMode = 1"
+                    id="continue"
+                    [style.background-color]="page.textColor"
+                    [style.color]="page.backgroundColor"
+                    [style.padding-left.px]="
+                      layoutConsts.fieldHeight / 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.padding-right.px]="
+                      layoutConsts.fieldHeight / 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.padding-bottom.px]="
+                      layoutConsts.fieldHeight / 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.padding-top.px]="
+                      layoutConsts.fieldHeight / 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.margin-bottom.px]="
+                      layoutConsts.spacing
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.margin-top.px]="
+                      layoutConsts.spacing * 0.5
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.border-radius.px]="
+                      layoutConsts.cornerRadius
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.font-size.px]="
+                      layoutConsts.fieldHeight
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                  >
+                    Import Account
+                  </button>
+                </div>
+
+                <div class="w-100 py-1 mt-2 px-2" *ngIf="err">
+                  <p
+                    class="w-100 text-center text-danger animate__animated animate__fadeIn"
+                    style="font-size: small"
+                  >
+                    {{ err }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="keyMode == 1">
+            <div
+              class="w-100 h-100 d-flex flex-column justify-content-center align-items-center animate__animated animate__fadeIn"
+              [style.color]="page.textColor"
+            >
+              <!-- <img
+                class="my-3"
+                [src]="img"
+                style="aspect-ratio: 1; object-fit: contain; width: 30%"
+              /> -->
+
+              <div class="w-100 text-center">
+                <div class="mw-50 mt-5 mb-3 mx-auto" *ngIf="img">
+                  <img
+                    #image
+                    id="image"
+                    class="w-100"
+                    [src]="img.url"
+                    style="object-fit: contain"
+                    [style.aspect-ratio]="img.width / img.height"
+                  />
+                </div>
+
+                <div class="w-100 mb-1" *ngIf="name">
+                  <h4 class="w-100 text-center">{{ name }}</h4>
+                </div>
+              </div>
+
+              <div class="w-100 py-4">
+                <div class="w-100">
+                  <span
+                    [style.font-size.px]="
+                      layoutConsts.labelHeight
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.line-height.px]="
+                      layoutConsts.labelHeight
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    class="w-100 text-start"
+                    >Private Key</span
+                  >
+                  <div
+                    class="border w-100"
+                    [style.padding-left.px]="
+                      layoutConsts.fieldHeight * 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.padding-right.px]="
+                      layoutConsts.fieldHeight * 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.padding-bottom.px]="
+                      layoutConsts.fieldHeight / 1.5
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.margin-bottom.px]="
+                      layoutConsts.spacing
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.margin-top.px]="
+                      layoutConsts.spacing * 0.5
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.border-radius.px]="
+                      layoutConsts.cornerRadius
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                  >
+                    <mat-form-field
+                      class="w-100"
+                      appearance="legacy"
+                      floatLabel="never"
+                      [style.font-size.px]="
+                        layoutConsts.fieldHeight
+                          | autosize: 'height':displayFrame:layoutMode
+                      "
+                    >
+                      <input
+                        class="h-100"
+                        matInput
+                        type="password"
+                        formControlName="key"
+                        placeholder="Enter Secure Key"
+                        [style.color]="page.textColor"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="w-100 py-1 mt-2 px-2" *ngIf="err">
+                  <p
+                    class="w-100 text-center text-danger animate__animated animate__fadeIn"
+                    style="font-size: small"
+                  >
+                    {{ err }}
+                  </p>
+                </div>
+                <div class="w-100 py-1 mt-3">
+                  <button
+                    class="btn shadow fw-bold w-100"
+                    (click)="continue()"
+                    id="continue"
+                    [style.background-color]="page.textColor"
+                    [style.color]="page.backgroundColor"
+                    [style.padding-left.px]="
+                      layoutConsts.fieldHeight / 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.padding-right.px]="
+                      layoutConsts.fieldHeight / 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.padding-bottom.px]="
+                      layoutConsts.fieldHeight / 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.padding-top.px]="
+                      layoutConsts.fieldHeight / 1.1
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.margin-bottom.px]="
+                      layoutConsts.spacing
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.margin-top.px]="
+                      layoutConsts.spacing * 0.5
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.border-radius.px]="
+                      layoutConsts.cornerRadius
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.font-size.px]="
+                      layoutConsts.fieldHeight
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                  >
+                    Continue
+                    <span
+                      *ngIf="loading"
+                      class="spinner-border spinner-border-sm ms-1"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                  </button>
+                </div>
+
+                <div class="w-100 py-1 mt-3 px-2">
+                  <p
+                    class="w-100 text-center"
+                    [style.font-size.px]="
+                      layoutConsts.fieldHeight
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    [style.line-height.px]="
+                      layoutConsts.fieldHeight
+                        | autosize: 'height':displayFrame:layoutMode
+                    "
+                    role="button"
+                    (click)="keyMode = 0"
+                  >
+                    Don't have an an account?
+                    <b role="button" class="fw-bold">Create one</b>.
                   </p>
                 </div>
               </div>

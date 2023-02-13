@@ -12,8 +12,14 @@ export class AccountComponent implements OnInit {
 
   @Input() user?: User
   @Input() page?: AccountPage
+  @Input() displayFrame: { innerWidth: number; innerHeight: number } = window;
 
-  @Output() accountUpdated = new EventEmitter<{type: string, data: any}>();
+  @Output() accountUpdated = new EventEmitter<{type: string, data: any}>()
+
+  layoutConsts = {
+    labelHeight: 25,
+    imgHeight: 100
+  };
 
   constructor() { }
 

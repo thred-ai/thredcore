@@ -22,10 +22,19 @@ export class TabBarComponent implements OnInit {
 
   @Output() update = new EventEmitter<CdkDragDrop<Page[]>>();
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.displayFrame)
+  }
 
   onDropPage(event: CdkDragDrop<Page[]>): void {
 
     this.update.emit(event);
   }
+
+  @Input() displayFrame: { innerWidth: number; innerHeight: number } = window;
+
+  layoutConsts = {
+    barHeight: 60,
+    iconSize: 25
+  };
 }

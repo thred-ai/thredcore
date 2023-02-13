@@ -16,4 +16,11 @@ export class NavigationBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  @Input() displayFrame: { innerWidth: number; innerHeight: number } = window;
+
+  layoutConsts = {
+    barHeight: 60,
+    iconSize: 25
+  };
+
 }

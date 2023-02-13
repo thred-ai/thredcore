@@ -6,9 +6,25 @@
   (click)="editable ? null : clickedLayout.emit()"
 >
   <!--NAV BAR-->
+  <div class="w-100">
+    <div
+      *ngIf="safeArea.top > 0"
+      class="w-100"
+      [style.height.px]="safeArea.top"
+      [style.background-color]="
+        page.page.bar.visible
+          ? page.page.bar.backgroundColor
+          : page.page.backgroundColor
+      "
+    ></div>
 
-  <thred-navigation-bar [bar]="page.page.bar" [position]="page.page.position">
-  </thred-navigation-bar>
+    <thred-navigation-bar
+      [bar]="page.page.bar"
+      [position]="page.page.position"
+      [displayFrame]="pageDetails.frame"
+    >
+    </thred-navigation-bar>
+  </div>
 
   <!--BODY BAR-->
 
@@ -38,7 +54,11 @@
       <!-- show profile header if needed -->
 
       <ng-container *ngIf="page.page.type == 2">
-        <thred-account [user]="accountDetails.user" [page]="page.page">
+        <thred-account
+          [user]="accountDetails.user"
+          [displayFrame]="pageDetails.frame"
+          [page]="page.page"
+        >
         </thred-account>
       </ng-container>
 
@@ -54,6 +74,8 @@
         [loading]="authDetails.loading"
         [err]="authDetails.err"
         [page]="page.page"
+        [displayFrame]="pageDetails.frame"
+        [layoutMode]="layout.type"
         (authUpdated)="authUpdated.emit($event)"
       >
       </thred-auth>
@@ -62,17 +84,31 @@
   <!-- activeBlock.index == i ? activeBlock.block : undefined -->
   <!--TAB BAR-->
 
-  <thred-tab-bar
-    *ngIf="page.page.type == 0 || page.page.type == 2"
-    (update)="updatePages.emit($event)"
-    [tab]="page.page.tab"
-    [position]="page.page.position"
-    [editable]="editable"
-    [selectedIndex]="page.index"
-    [pages]="layout.pages"
-    (indexChanged)="pageChanged.emit($event)"
-  >
-  </thred-tab-bar>
+  <div class="w-100">
+    <thred-tab-bar
+      *ngIf="page.page.type == 0 || page.page.type == 2"
+      (update)="updatePages.emit($event)"
+      [tab]="page.page.tab"
+      [position]="page.page.position"
+      [editable]="editable"
+      [selectedIndex]="page.index"
+      [pages]="layout.pages"
+      [displayFrame]="pageDetails.frame"
+      (indexChanged)="pageChanged.emit($event)"
+    >
+    </thred-tab-bar>
+
+    <div
+      *ngIf="safeArea.bottom > 0"
+      class="w-100"
+      [style.height.px]="safeArea.bottom"
+      [style.background-color]="
+        page.page.type == 1
+          ? page.page.backgroundColor
+          : page.page.tab.backgroundColor
+      "
+    ></div>
+  </div>
 </div>
 
 <ng-template #blocksTemplate>
@@ -86,7 +122,7 @@
       (cdkDropListDropped)="updateBlocks.emit($event)"
     >
       <ng-container *ngFor="let b of page.page.blocks ?? []; index as i">
-        <div class="w-100" cdkDrag [cdkDragDisabled]="!editable">
+        <div cdkDrag [cdkDragDisabled]="!editable">
           <thred-block
             *ngIf="
               (overrideBlock && overrideBlock.blockIndex == i
