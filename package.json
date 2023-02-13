@@ -1,6 +1,6 @@
 {
   "name": "thred-core",
-  "version": "0.3.71",
+  "version": "0.3.72",
   "scripts": {
     "build-lib": "ng build thredcore && npm publish ../../dist/thredcore",
     "build-lib-watch": "ng build thredcore --watch"

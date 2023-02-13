@@ -19,7 +19,9 @@
     <div
       class="rounded-circle d-flex justify-content-center align-items-center mx-auto"
       style="aspect-ratio: 1; overflow: hidden; margin: 0"
-      [style.height.px]="layoutConsts.imgHeight | autosize: 'width':displayFrame"
+      [style.height.px]="
+        layoutConsts.imgHeight | autosize: 'width':displayFrame
+      "
       [style.background-color]="page.detailColor"
       *ngIf="page.displayPic"
     >
